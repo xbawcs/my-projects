@@ -1,0 +1,24 @@
+button{
+	border-radius: 5px;
+}
+.navbar{
+	padding: 10px 10% 10px 10%;
+}
+nav{
+	background-color: #563D7C;
+	color: #EEECF2; 
+}
+.navbar-light .navbar-brand{
+	color: #EEECF2; 
+}
+.tbl-student{
+	padding: 10px 10% 10px 10%;
+}
+.modal-content{
+	padding: 5px 15px 5px 10px;
+}
+#info-student{
+	width: 80%;
+	margin: 0 10% 0 10%;
+	background: #64B5F6;
+}
