@@ -8,9 +8,17 @@
 			@include('layouts/student_actions/add_modal')
 			&nbsp;&nbsp;&nbsp;
 			<input class="form-control" type="text" placeholder="Tìm kiếm sinh viên" id="search-student">
-
 		</div>
 		<br>
+		<div class="form-inline">
+			<label>Hiển Thị</label>
+			&nbsp;
+			<select name="" id="number-record" onchange="getNumberRecord()">
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+			</select>
+		</div>
 		<table class="table table-bordered" id="student-table">
 			<caption class="text-center font-weight-bold">Bảng danh sách sinh viên</caption>
 			<thead>
@@ -31,7 +39,7 @@
 					<tr class="item{{ $student->id }}" data-id="{{ $student->id }}">
 						<th class="text-center STT">{{ $i++ }}</th>
 						<td>{{ $student->code }}</td>
-						<td>{{ $student->avatar }}</td>
+						<td><img src="{{ asset($student->avatar) }}" class="imgS{{ $student->id }}" width="100px" height="100px"></td>
 						<td>{{ $student->name }}</td>
 						<td>{{ $student->dob }}</td>
 						<td>{{ $student->gender }}</td>
@@ -45,7 +53,11 @@
 				@endforeach
 			</tbody>
 		</table>
-		{{ $students->links() }}
+		<div>
+			<button id="load-data" class="btn float-right">Tiếp>></button>
+			<input type="hidden" id="all-record" value="{{ $count }}">
+			<input type="hidden" id="current-record" value={{ $students[2]->id }}>
+		</div>
 		{{-- modal delete --}}
 		@include('layouts/student_actions/delete_modal')
 		@include('layouts/student_actions/edit_modal')

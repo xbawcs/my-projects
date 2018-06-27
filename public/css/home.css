@@ -21,4 +21,13 @@ nav{
 	width: 80%;
 	margin: 0 10% 0 10%;
 	background: #64B5F6;
+	padding: 0 30px 30px 30px;
+}
+.form-infor{
+	padding: 10px 20px 10px 20px;
+	border: 2px solid white;
+}
+.infor-student-name{
+	font-size: 30px;
+	text-align: center;
 }

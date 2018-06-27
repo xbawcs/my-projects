@@ -17,9 +17,10 @@ class StudentController extends Controller
 	];
 
     public function index(){
-    	$students = Student::paginate(10);
+    	$students = Student::orderBy('created_at', 'DESC')->limit(5)->get();
         $i = 1;
-    	return view('layouts.home',compact('students','i'));
+        $count = Student::count();
+    	return view('layouts.home',compact('students', 'i', 'count'));
     }
 
     public function addStudent(Request $rq){
@@ -33,7 +34,8 @@ class StudentController extends Controller
                     'name' => $rq->name,
                     'dob' => $rq->dob,
                     'gender' => $rq->gender,
-                    'address' => $rq->address
+                    'address' => $rq->address,
+                    'avatar' => 'images/1530090489.png'
                 ];
                 $std = Student::create($data);
                 return response()->json($std);
@@ -74,4 +76,28 @@ class StudentController extends Controller
         return view('layouts.student_information',compact('student'));
     }
 
+    public function loadDataAjax(Request $request){
+        $students = Student::where('id', '<', $request->id)->orderBy('created_at', 'DESC')->limit(5)->get();
+        if(!$students->isEmpty()){
+            return response()->json($students);
+        }
+        return response()->json(['empty' => 'true']);
+    }
+
+    public function uploadImage($id, Request $request){
+
+        $student = Student::findOrFail($id);
+
+        if($request->hasFile('avatar')){
+            
+            $avatar = $request->file('avatar');
+            $nameFile = time().'.'.$avatar->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $avatar->move($destinationPath, $nameFile);
+            $student->avatar = 'images/'.$nameFile;
+            $student->save();
+            return redirect('/');
+        }            
+        return "ngu";
+    }
 }
