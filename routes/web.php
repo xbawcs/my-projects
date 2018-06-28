@@ -11,15 +11,23 @@
 |
 */
 Auth::routes();
-Route::get('', 'StudentController@index');
 
-Route::prefix('student')->group(function() {
-	Route::post('add','StudentController@addStudent');
-	Route::delete('{id}', 'StudentController@destroy');
-	Route::put('{id}', 'StudentController@edit');
-	Route::get('{id}', 'StudentController@infor');
-	Route::post('{id}/upload-image', 'StudentController@uploadImage')->name('upload');
+
+Route::middleware('checkadmin')->group(function () {
+	Route::get('', 'StudentController@index');
+	Route::prefix('student')->group(function() {
+		Route::post('add','StudentController@addStudent');
+		Route::delete('{id}', 'StudentController@destroy');
+		Route::put('{id}', 'StudentController@edit');
+		Route::get('{id}', 'StudentController@infor');
+		Route::post('{id}/upload-image', 'StudentController@uploadImage')->name('upload');
+	});
+	Route::get('load-more', 'StudentController@loadDataAjax');
 });
+Route::prefix('admin')->group(function(){
+	Route::get('login', 'AdminController@index');
+	Route::post('login', 'AdminController@login');
 
-Route::get('load-more', 'StudentController@loadDataAjax');
-
+	Route::get('logout', 'AdminController@logout');
+	Route::get('signup', 'AdminController@signup');	
+});

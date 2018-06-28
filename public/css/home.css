@@ -31,3 +31,17 @@ nav{
 	font-size: 30px;
 	text-align: center;
 }
+#login-form{
+	margin: 50px 20% 0 20%;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+}
+#login-form .login-head{
+	color: #31708f;
+    background-color: #d9edf7;
+    padding: 10px 10px 10px 10px;
+    border-radius: 4px;
+}
+#login-form .login-body{
+	padding: 10px 20px 10px 20px;
+}

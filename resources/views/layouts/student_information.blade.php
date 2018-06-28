@@ -6,7 +6,7 @@
 		<div>
 			<div class="row">
 				<div class="col-3">
-					<img src="{{ asset($student->avatar) }}" alt="avatar" width="200px" height="200px">
+					<img src="{{ asset($student->avatar) }}" alt="avatar" width="200px" height="200px" class="card-img-overlay">
 				</div>
 				<div class="col-9">
 					<div class="form-infor">
