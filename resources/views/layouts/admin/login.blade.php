@@ -18,7 +18,7 @@
 		</div>
 		<div class="login-body">	
 			<form action="login" method="POST" >
-				{{ csrf_field() }}
+				{!! csrf_field() !!}
 				<div class="form-group">
 					<label class="form-control-label">Tài Khoản</label>
 					<input type="text" name="email" class="form-control">
@@ -35,7 +35,7 @@
 					<button class="btn btn-success"><i class="fa fa-sign-in" aria-hidden="true"></i></button>
 					&nbsp;&nbsp;
 					<a href="signup" class="btn btn-info">Đăng ký mới</a>
-					<a href="#" class="btn btn-link">Đăng nhập với Facebook</a>
+					<a href="facebook" class="btn"><i class="fa fa-facebook-official fa-2" aria-hidden="true" style="font-size: 40px;"></i></a>
 				</div>
 			</form>
 		</div>

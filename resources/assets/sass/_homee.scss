@@ -1,0 +1,86 @@
+$standard-border: 1px solid black;
+
+@mixin avatar-size($width, $height) {
+	width: $width;
+	height: $height;
+}
+button {
+	border-radius: 5px;
+}
+nav {
+	background-color: #563D7C;
+	color: #EEECF2; 
+}
+.navbar {
+	padding: 10px 10% 10px 10%;
+}
+.navbar-light {
+	.navbar-brand {
+		color: #EEECF2; 
+	}
+}
+.tbl-student {
+	padding: 10px 10% 10px 10%;
+}
+.modal-content {
+	padding: 5px 15px 5px 10px;
+}
+#info-student {
+	width: 100%;
+	padding: 0 30px 30px 30px;
+}
+.picture-frame {
+	border: 2px solid gray;
+	width: 200px;
+	height: 200px;
+}
+.picture-frame {
+	img {
+		@include avatar-size(100%, 100%);
+	}
+
+}
+.form-infor {
+	padding: 10px 20px 10px 20px;
+	border: $standard-border;
+}
+.student-name {
+	font-size: 30px;
+	text-align: center;
+	border-bottom: $standard-border; 
+}
+#login-form {
+	margin: 50px 20% 0 20%;
+    border: 1px solid #bce8f1;
+    border-radius: 4px;
+
+    .login-head {
+		color: #31708f;
+	    background-color: #d9edf7;
+	    padding: 10px 10px 10px 10px;
+	    border-radius: 4px;
+	}
+
+	.login-body {
+		padding: 10px 20px 10px 20px;
+	}
+}
+
+/*class*/
+#class-content {
+	text-align: center;
+	padding: 10px;
+}
+.form-add-class {
+	width: 40%;
+	margin: 0 30% 0 30%;
+	padding: 10px;
+	display: none;
+}
+.form-search-student {
+	padding: 15px 10px 10px 10px;
+	border:1px solid rgba(0,0,0,.05);
+}
+#result-search {
+	width: 250px;
+}

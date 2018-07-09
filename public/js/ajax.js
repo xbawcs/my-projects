@@ -50,11 +50,9 @@ $('.modal-footer').on('click', '.add-student', function(){
 var id;
 // click to delete student
 $(document).on('click', '.delete-modal', function(e){
-	$('#id-delete').val($(this).data('id'));
-	id = $('#id-delete').val();
 	$('#name-delete').val($(this).data('name'));
+	id = $(this).data('id');
 	$('#deleteModal').modal('show');
-	e.preventDefault();
 });
 $('.modal-footer').on('click', '.delete-student', function(){
 	$.ajax({
@@ -198,3 +196,32 @@ $('#load-data').click( function(){
 // 		}
 // 	});
 // });
+
+// search-live
+
+$('#search-live').keyup(function(e){
+	var searchField = $('#search-live').val();
+	if (searchField) {
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: 'student/search/' + searchField,
+			data: {
+				'data': searchField,
+			},
+			success:function(data){
+				$('#result-search').html('');
+				if(data.msg){
+					$('#result-search').append("<li>" + data.msg + "</li>");
+				}else{
+					$.each(data, function(i, item){
+						$('#result-search').append("<li class='list-group-item'>" + item.code + '-' + item.name + "</li>");
+					});
+				}
+			}
+		});
+	}
+	else{
+		$('#result-search').html('');
+	}
+});

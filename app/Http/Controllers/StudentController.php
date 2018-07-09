@@ -24,8 +24,11 @@ class StudentController extends Controller
     }
 
     public function addStudent(Request $rq){
-        if($rq->ajax()){      
-            $validator = Validator::make($rq->all(), $this->rules);
+        if($rq->ajax()){  
+            $std = Student::where('code', $rq->code)->first();  
+              //checking if record no exist   
+            if($std->isEmpty()){
+                $validator = Validator::make($rq->all(), $this->rules);
                 if($validator->fails()){
                     return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
                 }
@@ -37,15 +40,18 @@ class StudentController extends Controller
                     'address' => $rq->address,
                     'avatar' => 'images/1530090489.png'
                 ];
+
                 $std = Student::create($data);
                 return response()->json($std);
+            }
+            return response()->json(['error' => 'Mã sinh viên đã tồn tại.']);
         }
     }
 
     public function destroy($id, Request $rq){
         $student = Student::findOrFail($id);
         
-        if($rq->isMethod('delete')){
+        if($rq->ajax()){
 
             $student->delete();
 
@@ -73,7 +79,7 @@ class StudentController extends Controller
 
     public function infor(Request $request, $id){
         $student = Student::findOrFail($id);
-        return view('layouts.student_information',compact('student'));
+        return view('layouts.students.information',compact('student'));
     }
 
     public function loadDataAjax(Request $request){
@@ -99,5 +105,13 @@ class StudentController extends Controller
             return redirect('/');
         }            
         return "ngu";
+    }
+    public function searchLive(Request $request){
+        $student = Student::where('name','LIKE','%'.$request->data."%")->distinct()->get();
+        
+        if($student){
+            return response()->json($student);
+        }
+        return response()->json(['msg' => 'no suggestion']);
     }
 }

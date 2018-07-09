@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Admin;
 use App\User;
+use App\Classs;
+use Socialite;
+
 class AdminController extends Controller
 {
     public function index(){
@@ -30,11 +33,26 @@ class AdminController extends Controller
     	return view('layouts.admin.signup');
     }
     public function doSignup(Request $request){
-    	
+    	if ($request->password == $request->rpassword) {
+    		$data = [
+    			'name' => $request->name,
+    			'email' => $request->email,
+    			'password' => Hash::make($request->password),
+    			'level' => '0',
+                'facebook_id' => '',
+    		];
+    		Admin::create($data);
+    		return redirect()->route('login');
+    	}
     }
     public function logout(Request $request){
     	$request->session()->forget('admin');
     	return redirect('admin/login');
     }
+    public function redirectToGoodle(){
+        return Socialite::driver('google')->redirect();
+    }
+    public function loginViaGoogle(){
 
+    }
 }

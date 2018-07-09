@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 button{
 	border-radius: 5px;
 }
@@ -6,7 +9,21 @@ button{
 }
 nav{
 	background-color: #563D7C;
-	color: #EEECF2; 
+	color: #EEECF2;
+}
+.col3{
+	width: 18%;
+	float: left;
+}
+.col9{
+	width:82%;
+	float: left;
+}
+.row{
+	margin: 0px;
+}
+.table-class{
+	padding: 5px 10% 5px 10%;
 }
 .navbar-light .navbar-brand{
 	color: #EEECF2; 
@@ -18,18 +35,26 @@ nav{
 	padding: 5px 15px 5px 10px;
 }
 #info-student{
-	width: 80%;
-	margin: 0 10% 0 10%;
-	background: #64B5F6;
+	width: 100%;
 	padding: 0 30px 30px 30px;
+}
+.picture-frame{
+	border: 2px solid gray;
+	width: 200px;
+	height: 200px;
+}
+.picture-frame img{
+	width: 100%;
+	height: 100%;
 }
 .form-infor{
 	padding: 10px 20px 10px 20px;
-	border: 2px solid white;
+	border: 1px solid black;
 }
-.infor-student-name{
+.student-name{
 	font-size: 30px;
 	text-align: center;
+	border-bottom: 1px solid black; 
 }
 #login-form{
 	margin: 50px 20% 0 20%;
@@ -44,4 +69,125 @@ nav{
 }
 #login-form .login-body{
 	padding: 10px 20px 10px 20px;
+}
+/*class*/
+#class-content{
+	text-align: center;
+	padding: 10px;
+}
+.form-add-class{
+	width: 40%;
+	margin: 0 30% 0 30%;
+	padding: 10px;
+	display: none;
+}
+.form-search-student{
+	padding: 15px 10px 10px 10px;
+	border:1px solid rgba(0,0,0,.05);
+}
+.nav-top{
+	width: 90%;
+	margin:auto;
+	height: 75px;
+	padding: 10px;
+	text-align: center;
+}
+.nav-top a{
+	text-decoration: none; 
+	color: white;
+}
+.nav-left{
+	width: 20%;
+	font-size: 30px;
+	padding: 5px;
+}
+.nav-left .highlight{
+	border: 0.5px solid white;
+	border-radius: 4px;
+	padding: 2px 7px 2px 7px;
+	font-weight: 600;
+	color: red;
+}
+.it{
+	padding: 10px;
+	border-bottom: 0.7px solid #E5E5E5;
+	font-weight: 500;
+	color: rgba(0,0,0,.65);
+}
+.it:hover {
+	color: black;
+}
+.nav-right{
+	width: 80%;
+	padding-top: 15px;
+	font-size: 15px;
+}
+.top-nav, .bot-nav{
+	padding: 7px;
+	border: 1px solid #E5E5E5;
+}
+.sort{
+	display: none;
+	/*padding-left: 18px;*/
+	text-align: center;
+}
+.text-content{
+	padding: 20px;
+}
+.nav-right .col-3{
+	padding: 0px;
+}
+
+.text-content{
+	width: 50%;
+	float: left;
+	border: 0.5px solid #E5E5E5;
+	height: auto; 
+}
+.text-content strong{
+	border-bottom: 0.5px solid #E5E5E5;
+}
+@media screen and (max-width:850px) {
+    .nav-top .nav-left,.nav-top .nav-right {
+		width: 100%;
+		text-align: center;
+	}
+	.nav-top{
+		padding-top: 0px; 
+	}
+	.responsive-m {
+		display: none;
+	}
+	.img-infor {
+		width: 100%;
+		display: block;
+	}
+	.nav-left{
+		font-size: 22px;
+		padding: 0px;
+	}
+	.col3, .col9{
+		width: 100%;
+	}
+	.top-nav{
+		width: 100%;
+		height: 55px;
+	}
+	.form-search{
+		width: 90%;
+		float: left;
+	}
+	.sort{
+		display: block;
+		width: 10%;
+		float: left;
+	}
+	.bot-nav{
+		display: none;
+	}
+	.text-content{
+		width: 100%;
+		border-bottom: 0.5px solid #E5E5E5; 
+	}
+
 }
