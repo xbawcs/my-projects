@@ -17,14 +17,18 @@ class StudentController extends Controller
 	];
 
     public function index(){
-    	$students = Student::paginate(10);
+    	$students = Student::orderBy('created_at', 'DESC')->limit(5)->get();
         $i = 1;
-    	return view('layouts.home',compact('students','i'));
+        $count = Student::count();
+    	return view('layouts.home',compact('students', 'i', 'count'));
     }
 
     public function addStudent(Request $rq){
-        if($rq->ajax()){      
-            $validator = Validator::make($rq->all(), $this->rules);
+        if($rq->ajax()){  
+            $std = Student::where('code', $rq->code)->first();  
+              //checking if record no exist   
+            if($std->isEmpty()){
+                $validator = Validator::make($rq->all(), $this->rules);
                 if($validator->fails()){
                     return response()->json(['errors' => $validator->getMessageBag()->toArray()]);
                 }
@@ -33,17 +37,21 @@ class StudentController extends Controller
                     'name' => $rq->name,
                     'dob' => $rq->dob,
                     'gender' => $rq->gender,
-                    'address' => $rq->address
+                    'address' => $rq->address,
+                    'avatar' => 'images/1530090489.png'
                 ];
+
                 $std = Student::create($data);
                 return response()->json($std);
+            }
+            return response()->json(['error' => 'Mã sinh viên đã tồn tại.']);
         }
     }
 
     public function destroy($id, Request $rq){
         $student = Student::findOrFail($id);
         
-        if($rq->isMethod('delete')){
+        if($rq->ajax()){
 
             $student->delete();
 
@@ -71,7 +79,39 @@ class StudentController extends Controller
 
     public function infor(Request $request, $id){
         $student = Student::findOrFail($id);
-        return view('layouts.student_information',compact('student'));
+        return view('layouts.students.information',compact('student'));
     }
 
+    public function loadDataAjax(Request $request){
+        $students = Student::where('id', '<', $request->id)->orderBy('created_at', 'DESC')->limit(5)->get();
+        if(!$students->isEmpty()){
+            return response()->json($students);
+        }
+        return response()->json(['empty' => 'true']);
+    }
+
+    public function uploadImage($id, Request $request){
+
+        $student = Student::findOrFail($id);
+
+        if($request->hasFile('avatar')){
+            
+            $avatar = $request->file('avatar');
+            $nameFile = time().'.'.$avatar->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $avatar->move($destinationPath, $nameFile);
+            $student->avatar = 'images/'.$nameFile;
+            $student->save();
+            return redirect('/');
+        }            
+        return "ngu";
+    }
+    public function searchLive(Request $request){
+        $student = Student::where('name','LIKE','%'.$request->data."%")->distinct()->get();
+        
+        if($student){
+            return response()->json($student);
+        }
+        return response()->json(['msg' => 'no suggestion']);
+    }
 }

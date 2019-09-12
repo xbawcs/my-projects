@@ -21,6 +21,8 @@ class CreateStudentsTable extends Migration
             $table->integer('gender');
             $table->string('address');
             $table->string('avatar')->nullable();
+            $table->string('class_code')->nullable();
+            $table->foreign('class_code')->references('code')->on('classes')->onDelete('cascade');
             $table->timestamps();
         });
     }

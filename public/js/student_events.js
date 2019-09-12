@@ -9,3 +9,10 @@ $("#content-table tr").hover(function(){
     }, function(){
     $(this).css("background-color", "white");
 });
+// show the number of student when changing value the select tag
+
+function getNumberRecord(){
+	var value = $('#number-record').val();
+	console.log(value);
+}
+
